@@ -1,6 +1,23 @@
+
 function fetchBooks() {
-  // To pass the tests, don't forget to return your fetch!
-  
+  return fetch("https://anapioficeandfire.com/api/books")
+    .then((resp) => resp.json())
+    .then((json) => {
+      // console.log response
+      console.log(json);
+
+      // To find the 5th book in the series
+      const theFifthBook = json[4];
+      console.log("The 5th book in the series:", theFifthBook);
+
+    
+      // to calculate the total number of pages of all the books
+      const totalNumberOfPages = json.reduce((total, book) => total + book.numberOfPages, 0);
+      console.log("The total number of pages of all the books:", totalNumberOfPages);
+
+      // Render the books on the webpage
+      renderBooks(json);
+    });
 }
 
 function renderBooks(books) {
